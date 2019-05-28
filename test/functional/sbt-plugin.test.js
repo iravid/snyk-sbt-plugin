@@ -7,7 +7,8 @@ test('check build args with array', function(t) {
     '-Pjaxen',
   ]);
   t.deepEqual(result, [
-    '-Dsbt.log.noformat=true',
+    '-debug',
+    '"-J-Dsbt.log.noformat=true"',
     '-Paxis',
     '-Pjaxen',
     'dependencyTree',
@@ -18,7 +19,8 @@ test('check build args with array', function(t) {
 test('check build args with string', function(t) {
   var result = plugin.buildArgs('-Paxis -Pjaxen');
   t.deepEqual(result, [
-    '-Dsbt.log.noformat=true',
+    '-debug',
+    '"-J-Dsbt.log.noformat=true"',
     '-Paxis -Pjaxen',
     'dependencyTree',
   ]);
