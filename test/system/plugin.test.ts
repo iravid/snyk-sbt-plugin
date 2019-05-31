@@ -84,6 +84,18 @@ test('run inspect() with failing `sbt` execution', async (t) => {
   }
 });
 
+test('run inspect() with bad file location', async (t) => {
+  try {
+    await plugin.inspect(path.join(
+    __dirname, '..', 'i-do-not-exist'),
+  'build.sbt', {});
+    t.fail('should not be reached');
+  } catch (error) {
+    t.match(error.message, 'build.sbt not found at location');
+    t.pass('Error thrown correctly');
+  }
+});
+
 function stubSubProcessExec(t) {
   const executeStub = sinon.stub(subProcess, 'execute')
     .callsFake(() => {
